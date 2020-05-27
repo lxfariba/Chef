@@ -1,0 +1,163 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head -->
+
+<head>
+    <title>Chef OnLine Restaurant</title>
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Key Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta-Tags -->
+    <!-- Index-Page-CSS -->
+    <link rel="stylesheet" href="{% static 'account/Profile/css/style.css' %}" type="text/css" media="all">
+    <!-- //Custom-Stylesheet-Links -->
+    <!--fonts -->
+    <!-- //fonts -->
+    <link rel="stylesheet" href="{% static 'account/Profile/css/font-awesome.min.css' %}" type="text/css" media="all">
+    <!-- //Font-Awesome-File-Links -->
+
+	<!-- Google fonts -->
+	<link href="//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400i,700,700i" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800" rel="stylesheet">
+	<!-- Google fonts -->
+
+</head>
+<!-- //Head -->
+<!-- Body -->
+
+<body>
+
+<section class="main">
+	<div class="layer">
+
+		<div class="bottom-grid">
+			<div class="logo">
+
+{#				<h1> <a href="index.html"><span class="fa fa-key"></span> Key</a></h1>#}
+			</div>
+			<div class="links">
+				<ul class="links-unordered-list">
+					<li class="active">
+						<a href="{% url 'account:profile' %}" class="">Profile</a>
+					</li>
+					<li class="">
+						<a href="{% url 'home' %}" class=""> Home </a>
+					</li>
+					<li class="">
+						<a href="{% url 'account:change_password' %}" class=""> Change Password</a>
+					</li>
+{#					<li class="">#}
+{#						<a href="#" class="">Contact</a>#}
+{#					</li>#}
+				</ul>
+			</div>
+		</div>
+		<div class="content-w3ls">
+			<!-- <div class="text-center icon">
+				<span class="fa fa-html5"></span>
+			</div> -->
+			<div class="content-bottom">
+                {% if form %}
+
+				<form action="" method="POST" >{% csrf_token %}
+
+                    <div class="field-group">
+						<span class="	fas fa-user-check" aria-hidden="true"></span>
+						<div class="wthree-field">
+							{{ form.first_name }}
+						</div>
+					</div>
+                    <div class="field-group">
+						<span class=" fas fa-user-check" aria-hidden="true"></span>
+						<div class="wthree-field">
+							{{ form.last_name }}
+						</div>
+					</div>
+                    <div class="field-group">
+						<span class="fa fa-phone" aria-hidden="true"></span>
+						<div class="wthree-field">
+							{{ form.phone_number }}
+						</div>
+					</div>
+					<div class="field-group">
+						<span class="fa fa-map-marker" aria-hidden="true"></span>
+						<div class="wthree-field">
+                            {{ form.address }}
+						</div>
+					</div>
+					<div class="wthree-field">
+						<button type="submit" class="btn"> save edit</button>
+					</div>
+					<!-- <ul class="list-login">
+						<li class="switch-agileits">
+							<label class="switch">
+								<input type="checkbox">
+								<span class="slider round"></span>
+								keep Logged in
+							</label>
+						</li>
+
+						<li class="clearfix"></li>
+					</ul> -->
+				</form>
+            {% endif %}
+			</div>
+		</div>
+
+    </div>
+</section>
+
+</body>
+<!-- //Body -->
+</html>
+
+{##}
+{# {% if form %}#}
+{#            <form action="" method="POST" id="profile">{% csrf_token %}#}
+{#                <label for="first_name">First_name:</label>#}
+{#                <br />#}
+{#                  {{form.first_name}}#}
+{#                <br/>#}
+{#                <br/>#}
+{#                <label for="last_name">Last_name:</label>#}
+{#                <br />#}
+{#                {{ form.last_name }}#}
+{#                <br/>#}
+{#                <br/>#}
+{#                <label for="phone_number">Phone_number:</label>#}
+{#                <br />#}
+{#                {{ form.phone_number }}#}
+{#                <br/>#}
+{#                <br/>#}
+{#                <label for="address">Address:</label>#}
+{#                <br />#}
+{#                {{ form.address}}#}
+{#                <br/>#}
+{#                <br/>#}
+{#                <input class="button" type="submit" value="edit" />#}
+{#            </form>#}
+{##}
+{#    {% endif %}#}
+{##}
+    {% if validation %}
+        <p> your phone number is not valid! </p>
+    {% endif %}
+
+
+    {% if edit %}
+        <p> edited your profile successfully!</p>
+    {% endif %}
+
+

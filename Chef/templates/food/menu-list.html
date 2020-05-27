@@ -1,0 +1,99 @@
+{% extends 'Chef/base.html' %}
+{% load static %}
+
+
+{% block slider %}
+
+    <section class="banner_area">
+            <div class="container">
+                <div class="banner_content">
+                    <h4>Menu List</h4>
+                    <a href="#">Home</a>
+                    <a class="active" href="menu-list.html">Menu</a>
+                </div>
+            </div>
+    </section>
+
+    <section class="most_popular_item_area menu_list_page">
+            <div class="container">
+                <div class="popular_filter">
+                    <ul>
+                        <li class="active" data-filter="*"><a href="">All</a></li>
+                        <li data-filter=".PIZ"><a href="">Pizza</a></li>
+                        <li data-filter=".BUR"><a href="">Burger</a></li>
+                        <li data-filter=".SAN"><a href="">Sandwich</a></li>
+                        <li data-filter=".FRI"><a href="">Fried</a></li>
+                        <li data-filter=".SAL"><a href="">Salad</a></li>
+                        <li data-filter=".APP"><a href="">Appetizer</a></li>
+                    </ul>
+                </div>
+                <div class="p_recype_item_main">
+                    <div class="row p_recype_item_active">
+                        {% if food_list %}
+                            {% for food in food_list %}
+                                <form action="{% url 'food:add_to_cart' %}" method="POST">{% csrf_token %}
+                                <div class="col-md-6 {{ food.category }}">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img src="{{ food.picture_food.url }}" width="120px" height="115px" alt="" />
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="#"><h3>{{ food.name }}</h3></a>
+                                            <h4>${{ food.price }}</h4>
+
+                                            <a href="{% url 'food:detail' food.name food.id %}"><p>More Info</p></a>
+                                            <input  type="hidden" name="food-id" value="{{ food.id}}"/>
+                                            <input id="#add_to_cart" class="read_mor_btn" type="submit" value="Add To Cart" />
+{#                                            <a id="#add_to_cart" data-id="{{food.id}}" class="read_mor_btn" href="{% url 'food:cart'  %}">Add To Cart</a>#}
+{#                                            <ul>#}
+{#                                                <li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#                                                <li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#                                                <li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#                                                <li><a href="#"><i class="fa fa-star"></i></a></li>#}
+{#                                                <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>#}
+{#                                            </ul>#}
+                                            <fieldset class="rating">
+                                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                                <input type="radio" id="star4half" name="rating" value="9/2" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                                <input type="radio" id="star3half" name="rating" value="7/2" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                                <input type="radio" id="star2half" name="rating" value="5/2" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                <input type="radio" id="star1half" name="rating" value="3/2" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                                <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                            </fieldset>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                </form>
+                            {% endfor %}
+
+                            <!--------------- Paginator ---------->
+                            <div class="pagination">
+                            <span class="step-links">
+                                {% if food_list.has_previous%}
+                                    <a href="?page={{ food_list.previous_page_number }}"> previous</a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Page {{ food_list.number }}of{{ food_list.paginator.num_pages }}.
+                                </span>
+
+                                {% if food_list.has_next%}
+                                    <a href="?page={{ food_list.next_page_number }}"> next </a>
+                                {% endif %}
+                            </span>
+					        </div>
+
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--================End Our feature Area =================-->
+
+{% endblock %}

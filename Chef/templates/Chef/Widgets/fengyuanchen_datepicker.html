@@ -1,0 +1,10 @@
+
+{% include "Chef/reservation.html" %}
+
+<script>
+  $(function () {
+    $("input[name='{{ widget.name }}']").datepicker({
+      format:'dd/mm/yyyy',
+    });
+  });
+</script>

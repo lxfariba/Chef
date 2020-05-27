@@ -1,0 +1,103 @@
+{% extends 'Chef/base.html' %}
+{% load static %}
+
+
+{% block slider %}
+    <section class="banner_area">
+            <div class="container">
+                <div class="banner_content">
+                    <h4>Menu List</h4>
+                    <a href="#">Home</a>
+                    <a class="active" href="{% url 'food:menu_food' %}">Menu</a>
+                </div>
+            </div>
+    </section>
+    <section class="most_popular_item_area menu_list_page">
+        <div class="container">
+            <div class="p_recype_item_main">
+                    <div class="row p_recype_item_active">
+                            {% if food_detail %}
+
+                                <form id="rating-form" action="" method="POST">{% csrf_token %}
+
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <img src="{{ food_detail.picture_food.url }}" width="120px" height="115px" alt="" />
+                                        </div>
+                                        <div class="media-body">
+                                            <a href="#"><h3>{{ food_detail.name }}</h3></a>
+                                            <br>
+                                            <h4>${{ food_detail.price }}</h4>
+                                            <p> {{ food_detail.description }} </p>
+{#                                            <input id="#add_to_cart" class="read_mor_btn" type="submit" value="Add To Cart" />#}
+{#                                            <a id="#add_to_cart" data-id="{{food.id}}" class="read_mor_btn" href="{% url 'food:cart'  %}">Add To Cart</a>#}
+
+                                            <fieldset class="rating">
+                                                <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                                                <input type="radio" id="star4half" name="rating" value="4.5" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                                                <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                                                <input type="radio" id="star3half" name="rating" value="3.5" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                                                <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                                                <input type="radio" id="star2half" name="rating" value="2.5" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                                                <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                                                <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                                                <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                                                <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                                            </fieldset>
+                                             &nbsp &nbsp &nbsp &nbsp &nbsp
+                                             <input id="#add_to_cart" class="read_mor_btn" type="submit" value="Add To Cart" />
+                                        </div>
+{#                                        {% endif %}#}
+                                    </div>
+                               {% endif %}
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+
+{#////////////////////////////////////////////////////////////////////////////////////////////#}
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("input[name='rating']").change(function (event) {
+        event.preventDefault();
+            var selected_id = $("input[name='rating']:checked").val();
+            alert(selected_id),
+            $.ajax({
+                url:'{% url 'food:detail' food_detail.name food_detail.id %}"',
+                data:JSON.stringify({'rating':selected_id}),
+                dataType:'json',
+                type:'POST',
+                success:function (data) {
+                        console.log(data);
+                        alert('Done!');
+                        },
+
+                error:function(data) {
+                        console.log("everything went to shit");
+
+                    }
+            });
+        });
+
+    })
+        {#function click_rating(event) {#}
+        {#    event.preventDefault();#}
+        {#    rank = $('#stars').val();#}
+        {##}
+        {#    $.ajax({#}
+                {#url:"{% url 'food:detail' food_detail.id %}",#}
+        {#        method:"POST",#}
+        {#        data:{"name":rating},#}
+        {#        success:function (data) {#}
+        {#            window.alert("your rating saved successfully")#}
+        {##}
+        {#        }#}
+        {#    });#}
+
+    </script>
+{% endblock slider %}

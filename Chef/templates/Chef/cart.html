@@ -1,0 +1,149 @@
+{% extends 'Chef/base.html' %}
+{% load static %}
+
+{% block slider %}
+     <!--================Banner Area =================-->
+        <section class="banner_area">
+            <div class="container">
+                <div class="banner_content">
+                    <h4>Your Cart</h4>
+                    <a href="#">Home</a>
+                     <a class="active" href="#">Cart</a>
+                </div>
+            </div>
+        </section>
+    <!--================End Banner Area =================-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Delicious Shopping Cart</title>
+    <link rel="stylesheet" href="{% static 'food/cart/css/reset.min.css' %}">
+    <link rel='stylesheet' href='{% static 'food/cart/css/jquery-ui.css' %}'>
+    <link rel="stylesheet" href="{% static 'food/cart/css/style.css' %}">
+    <script src="{% static 'food/cart/js/prefixfree.min.js' %}"></script>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+    <div class="header">
+        <p>
+            "I say let the world go to hell, but I should always have my tea."
+        </p>
+        <p>
+            ― Fyodor Dostoyevsky, Notes from Underground
+        </p>
+    </div>
+
+<div class="cart-container">
+
+    <ul class="cart">
+       {% if request.session.foods %}
+        <form action="{% url 'food:delete_item'  %}" method="POST">{% csrf_token %}
+        {%  for food in request.session.foods %}
+        <li class="product" data-price="{{ food.price}}" data-quantity="{{ food.quantity }}" >
+            <div class="product-preview">
+                <div class="thumbnail">
+                    <img class="image" src="{{ food.picture }}" />
+                </div>
+                <div class="product-paper">
+                    <div class="product-name">
+                        {{ food.name }}
+                    </div>
+                    <div class="product-price">
+                        $ {{ food.price}}
+                    </div>
+                </div>
+            </div>
+            <div class="product-quantity">
+                x{{food.quantity}}
+{#                <input type="number" style="{width:7px; height:6px}" name="food-{{ food.food_id }}"  value="x{{ food.quantity }}" min="1">#}
+
+            </div>
+            <div class="product-interactions">
+                <div class="button plus">
+                    +
+                </div>
+                <div class="button minus">
+                    -
+                </div>
+                <input  type="hidden" name="food-id" value="{{ food.food_id}}"/>
+                <input  class="button del" type="submit" value="x" />
+{#                <div class="button del">#}
+{#                    <input  class="button del" type="submit" value="x" />#}
+{#                </div>#}
+            </div>
+        </li>
+        {% endfor %}
+        </form>
+        </ul>
+
+    </div>
+    <table class="bill">
+        <tr class="subtotal">
+            <td class="label">
+              Subtotal :
+            </td>
+            <td class="value">
+              $ {{  request.session.subtotal }}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="label">
+                Shipping :
+            </td>
+            <td class="value">
+                $ 5.00
+            </td>
+        </tr>
+        <tr class="total">
+            <td class="label">
+                Total :
+            </td>
+            <td class="value">
+          $ {{ request.session.total }}
+        </td>
+        </tr>
+    </table>
+    <div class="actions">
+        <div class="big-button go">
+            <a id = 'chk'  href="{% url 'food:checkout' %}"> Get them ! </a>
+        </div>
+{#        <div id="dialog">#}
+{#            <p><a href="{% url 'account:login' %}"> Go to Login Page</a></p>#}
+{#        </div>#}
+    </div>
+
+    {% else %}
+
+    <section class="cart_area">
+        <div class="container-cart">
+            <div class="cart_content">
+                <h4>empty</h4>
+{#                    <a href="#">Home / </a>#}
+{#                    <a class="active" href="#">Your Orders</a>#}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <div class="actions">
+        <div class="big-button return">
+            <a href="{% url 'food:menu_food' %}"> Return to shop</a>
+        </div>
+    </div>
+{#    <div class="actions">#}
+{#        <div>#}
+{#            <a href="{% url 'food:checkout' %}"> Check out Orders</a>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+    <!-- partial -->
+    <script src='{% static 'food/cart/js/jquery.min.js' %}'></script>
+    <script src='{% static 'food/cart/js/jquery-ui.min.js' %}'></script>
+    <script  src="{% static 'food/cart/js/script.js' %}"></script>
+    <script  src="{% static 'food/cart/js/message.js' %}"></script>
+
+    </body>
+    </html>
+    {% endblock slider %}

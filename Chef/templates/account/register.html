@@ -1,0 +1,131 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Head -->
+
+<head>
+    <title>Chef OnLine Restaurant</title>
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Key Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta-Tags -->
+    <!-- Index-Page-CSS -->
+    <link rel="stylesheet" href="{% static 'account/Profile/css/style.css' %}" type="text/css" media="all">
+    <!-- //Custom-Stylesheet-Links -->
+    <!--fonts -->
+    <!-- //fonts -->
+    <link rel="stylesheet" href="{% static 'account/Profile/css/font-awesome.min.css' %}" type="text/css" media="all">
+    <!-- //Font-Awesome-File-Links -->
+
+	<!-- Google fonts -->
+	<link href="//fonts.googleapis.com/css?family=Quattrocento+Sans:400,400i,700,700i" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Mukta:200,300,400,500,600,700,800" rel="stylesheet">
+	<!-- Google fonts -->
+
+</head>
+<!-- //Head -->
+<!-- Body -->
+
+<body>
+
+<section class="main">
+	<div class="layer">
+
+		<div class="bottom-grid">
+			<div class="logo">
+				<h1> <a href="index.html"><span class="fa fa-key"></span> Key</a></h1>
+			</div>
+			<div class="links">
+				<ul class="links-unordered-list">
+					<li class="active">
+						<a href="{% url 'account:register' %}" class="">Register</a>
+					</li>
+					<li class="">
+						<a href="{% url 'home' %}" class=""> Home</a>
+					</li>
+					<li class="">
+						<a href="{% url 'account:login' %}" class=""> Login</a>
+					</li>
+					<li class="">
+						<a href="#" class="">Contact</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="content-w3ls">
+			<!-- <div class="text-center icon">
+				<span class="fa fa-html5"></span>
+			</div> -->
+			<div class="content-bottom">
+				<form action="" method="POST">{% csrf_token %}
+					<div class="field-group">
+						<span class="	fas fa-user-check" aria-hidden="true"></span>
+						<div class="wthree-field">
+							<input name="first_name" id="text1" type="text" value="" placeholder="Firstname" required>
+						</div>
+					</div>
+                    <div class="field-group">
+						<span class=" fas fa-user-check" aria-hidden="true"></span>
+						<div class="wthree-field">
+							<input name="last_name" id="text1" type="text" value="" placeholder="Lastname" required>
+						</div>
+					</div>
+                    <div class="field-group">
+						<span class="fa fa-user" aria-hidden="true"></span>
+						<div class="wthree-field">
+							<input name="username" id="text1" type="text" value="" placeholder="Username" required>
+						</div>
+					</div>
+                    <div class="field-group">
+						<span class="fa fa-lock" aria-hidden="true"></span>
+						<div class="wthree-field">
+                            <input name="password" id="myInput" type="Password" placeholder="Password">
+                        </div>
+					</div>
+                    <div class="field-group">
+						<span class="fa fa-phone" aria-hidden="true"></span>
+						<div class="wthree-field">
+							<input name="phone_number" id="text1" type="text" value="" placeholder="Phonenumber" required>
+						</div>
+					</div>
+					<div class="field-group">
+						<span class="fa fa-map-marker" aria-hidden="true"></span>
+						<div class="wthree-field">
+                    <input name="address" id="text1" type="text" value="" placeholder="Address" required>
+						</div>
+					</div>
+					<div class="wthree-field">
+						<button type="submit" class="btn">Get Started</button>
+					</div>
+					<!-- <ul class="list-login">
+						<li class="switch-agileits">
+							<label class="switch">
+								<input type="checkbox">
+								<span class="slider round"></span>
+								keep Logged in
+							</label>
+						</li>
+
+						<li class="clearfix"></li>
+					</ul> -->
+				</form>
+			</div>
+		</div>
+
+    </div>
+</section>
+
+</body>
+<!-- //Body -->
+</html>

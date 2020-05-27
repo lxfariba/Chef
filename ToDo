@@ -1,0 +1,7 @@
+In Chef project I use the template named is "redcayenne".
+
+
+for booking reserve form use this widgets for time and date :
+"https://github.com/asaglimbeni/django-datetime-widget"
+
+and see this " http://www.dynarch.com/jscal/ "

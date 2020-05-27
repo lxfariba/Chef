@@ -1,0 +1,69 @@
+{% extends 'Chef/base.html' %}
+{% load static %}
+
+
+{% block slider %}
+    <!--================Banner Area =================-->
+        <section class="banner_area">
+            <div class="container">
+                <div class="banner_content">
+                    <h4>Check Out List</h4>
+                    <a href="#">Home</a>
+                    <a class="active" href="#">Your Orders</a>
+                </div>
+            </div>
+        </section>
+    <!--================End Banner Area =================-->
+
+
+    {% if request.session.foods %}
+        <h3> List of your orders</h3>
+        <form  id="checkout"  action="{% url 'food:checkout' %}" method="POST">{% csrf_token %}
+            <table>
+                <tr>
+                    <td> # </td>
+                    <td> name</td>
+                    <td> price </td>
+                    <td> quantity </td>
+{#                    <td> Total </td>#}
+                </tr>
+                {% for food in request.session.foods %}
+                <tr>
+                    <td> <img src="{{ food.picture}}" style="height: 100px; width: 100px;"></td>
+                    <td> {{ food.name }}</td>
+                    <td> {{ food.price }}</td>
+                    <td> {{ food.quantity }}</td>
+                    <td>{% widthratio food.quantity 1 food.price %}</td>
+                {% endfor %}
+
+                </tr>
+                <tr>
+                    <td>
+                    Subtotal:
+                    </td>
+                    <td> {{ request.session.subtotal }}</td>
+                </tr>
+                <tr>
+                    <td>
+                    Total:
+                    </td>
+                    <td> {{ request.session.total }}</td>
+                </tr>
+                <tr >
+                        <td>
+                            <input class="button" type="submit" name="save" value="save" onclick="check()"/>
+                        </td>
+                </tr>
+
+            </table>
+        </form>
+
+        <script type="text/javascript">
+            function check() {
+                document.getElementById('checkout').submit()
+                    alert("OK,save your orders!")
+                    location.href="{% url 'food:menu_food' %}";
+                    }
+        </script>
+    {% endif %}
+{% endblock %}
